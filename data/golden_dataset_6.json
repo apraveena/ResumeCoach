@@ -1,0 +1,8 @@
+[
+  {"id":"TC01","resume":"Software engineer with Python, Docker and SQL experience. Built Python APIs and containerized services.","job_description":"Required: Python, Docker, SQL. Preferred: Kubernetes.","expected_matching_skills":["python","docker","sql"],"expected_missing_skills":["kubernetes"],"score_range":[65,100]},
+  {"id":"TC02","resume":"Data analyst skilled in Excel and Tableau. Created dashboards for sales teams.","job_description":"Required: Python, Kubernetes, AWS. Preferred: Docker.","expected_matching_skills":[],"expected_missing_skills":["python","kubernetes","aws","docker"],"score_range":[0,40]},
+  {"id":"TC03","resume":"DevOps engineer using AWS and Docker. Managed cloud deployments.","job_description":"Required: AWS, Docker, Terraform, Kubernetes.","expected_matching_skills":["aws","docker"],"expected_missing_skills":["terraform","kubernetes"],"score_range":[35,80]},
+  {"id":"TC04","resume":"Built a Python script to automate weekly reporting. No quantified impact documented.","job_description":"Required: Python automation and reporting.","expected_matching_skills":["python","automation","reporting"],"expected_missing_skills":[],"score_range":[65,100]},
+  {"id":"TC05","resume":"Machine learning engineer experienced in PyTorch and MLflow. Trained classification models.","job_description":"Required: PyTorch, MLflow, TensorFlow.","expected_matching_skills":["pytorch","mlflow"],"expected_missing_skills":["tensorflow"],"score_range":[40,90]},
+  {"id":"TC06","resume":"Backend engineer using Java and PostgreSQL. Designed REST APIs.","job_description":"Required: Java, PostgreSQL, REST APIs.","expected_matching_skills":["java","postgresql","rest apis"],"expected_missing_skills":[],"score_range":[70,100]}
+]

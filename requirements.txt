@@ -1,0 +1,8 @@
+  streamlit
+  pypdf
+  python-docx
+  groq
+  python-dotenv
+  requests
+  beautifulsoup4
+  mlflow
