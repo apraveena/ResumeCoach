@@ -1,8 +1,8 @@
-  streamlit
-  pypdf
-  python-docx
-  groq
-  python-dotenv
-  requests
-  beautifulsoup4
-  mlflow
+streamlit
+pypdf
+python-docx
+groq
+python-dotenv
+requests
+beautifulsoup4
+mlflow>=2.15,<4
