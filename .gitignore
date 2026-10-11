@@ -7,3 +7,11 @@ _pycache_/
 __pycache__/
 evals/results_*.csv
 evals/predictions_*.jsonl
+evals/mlruns/
+mlruns/
+mlflow.db
+mlflow.db-*
+mlartifacts/
+mlruns/
+evals/runs/
+.gitignore
