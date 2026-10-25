@@ -1,5 +1,7 @@
 # ResumeCoach
-
+Your Full Name: Praveena Alapati
+Your Uplevel Email Address: praveena.alapati@gmail.com
+Name of the Problem Statement of Submission:
 ## Project Purpose
 
 ResumeCoach is an AI-powered resume coaching application. It compares a candidate's resume with a target job description and produces practical, evidence-based feedback.
@@ -8,7 +10,10 @@ The application is designed to help a job seeker:
 
 - understand how well the resume matches the target role;
 - identify skills that are present and skills that may be missing;
+- identify strengths to emphasize and actions to improve the application;
 - improve vague resume bullet points using the STAR framework; and
+- prepare for interviews with likely questions, talking points, and questions to ask; and
+- ask follow-up questions through a conversational resume coach; and
 - download a tailored resume and a plain-text coaching report.
 
 This project demonstrates document processing, prompt-based large language model use, structured JSON validation, file generation, and evaluation of AI output.
@@ -25,10 +30,10 @@ Resume file + job description
 	 Groq AI resume analysis
 		 |
 		 v
-  Match score, skill gaps, and rewrites
+	Fit, gaps, strengths, advice, and rewrites
 		 |
 		 v
-   Tailored DOCX and coaching report
+	 Report, interview preparation, and chat
 ```
 
 The application uses prompt version 2 by default. This prompt emphasizes source grounding: the model should improve wording without inventing metrics, employers, qualifications, or achievements.
@@ -37,9 +42,10 @@ The application uses prompt version 2 by default. This prompt emphasizes source 
 
 | File or folder | Purpose |
 |---|---|
-| `app.py` | Streamlit user interface and end-to-end application flow |
+| `app.py` | Streamlit user interface, persistent sidebar chat, and end-to-end application flow |
 | `parser.py` | Extracts readable text from PDF and DOCX resumes |
-| `coach.py` | Calls the Groq model and parses the structured AI response |
+| `coach.py` | Calls the Groq model for structured resume analysis |
+| `chat_coach.py` | LangChain chat chain and in-memory conversation history |
 | `coach_v1.py` | Earlier standalone version of the coaching prompt and call |
 | `doc_generator.py` | Creates tailored DOCX and text report downloads |
 | `prompts/` | Versioned system prompts used by the coach |
@@ -75,6 +81,8 @@ streamlit run app.py
 
 The interface accepts a text-searchable PDF or DOCX resume. Scanned image-only resumes are rejected because the parser cannot extract reliable text from them. The job description can be pasted directly or fetched from a URL.
 
+After analysis, the page also displays strengths to emphasize, recommended coaching actions, interview preparation, and rewrite-grounding checks. The persistent sidebar chat is visible throughout the session and uses LangChain's message-history wrapper so previous questions and answers are included in later responses.
+
 ## Run the Evaluation
 
 Run a three-case smoke test:
@@ -97,6 +105,8 @@ The evaluator checks:
 - whether rewritten source text exists in the original resume; and
 - rewrite quality, relevance, STAR structure, clarity, and unsupported claims.
 
+For prompt version 2, the evaluator also validates strengths, coaching actions, interview preparation, and rewrite-grounding fields.
+
 The LLM judge is advisory. Its results should be reviewed by a person because language-model grading is subjective. Evaluation commands make live Groq API calls and may incur usage costs.
 
 To compare the two prompt versions:
@@ -113,7 +123,12 @@ python evals/eval_runner.py --judge --prompt-version v2
 - Job-description extraction from websites depends on the website allowing automated requests and exposing readable page text.
 - The match score is an estimate from the language model, not an official ATS score.
 - The AI must not invent resume facts; the evaluation judge is used to identify cases where a rewrite may violate this rule.
+- The chat coach uses the current session only; it does not save conversations after the browser session ends.
 - The current project is a Streamlit MVP and does not include user accounts, persistent resume storage, or production deployment configuration.
+- The initial resume analysis uses a fixed workflow and direct Groq call rather than an autonomous agent. The conversational chat uses LangChain, but it does not select tools or perform autonomous actions.
+- LangChain chat memory is in-process memory. A restart of the Streamlit server clears the conversation history.
+- Long resume, job-description, and chat inputs are shortened before model calls to stay within the Groq service token limit.
+- If the primary `openai/gpt-oss-120b` analysis returns empty or invalid content, the app retries with `openai/gpt-oss-20b` and parses the response locally.
 
 ## Evaluation Result
 

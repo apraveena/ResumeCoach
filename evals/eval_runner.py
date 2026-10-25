@@ -72,8 +72,19 @@ def run(use_judge=False, limit=None, prompt_version="v2"):
             assert isinstance(result["summary"], str)
             assert isinstance(result["total_weak_bullets_found"], int)
             assert isinstance(result["rewrites_summary"], str)
+            if prompt_version == "v2":
+                assert isinstance(result["strengths_to_emphasize"], list)
+                assert isinstance(result["coaching_actions"], list)
+                interview = result["interview_preparation"]
+                assert isinstance(interview, dict)
+                assert all(isinstance(interview[key], list) for key in (
+                    "likely_questions", "talking_points", "questions_to_ask"
+                ))
             for rewrite in result["star_rewrites"]:
                 assert all(isinstance(rewrite[k], str) for k in ("original", "rewritten", "reason"))
+                if prompt_version == "v2":
+                    assert type(rewrite["grounded"]) is bool
+                    assert isinstance(rewrite["unsupported_claims"], list)
             row["matching_f1"] = round(prf(case["expected_matching_skills"], result["matching_skills"])[2], 3)
             row["missing_f1"] = round(prf(case["expected_missing_skills"], result["missing_skills"])[2], 3)
             row["score_in_range"] = case["score_range"][0] <= score <= case["score_range"][1]

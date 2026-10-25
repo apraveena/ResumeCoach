@@ -114,6 +114,23 @@ def generate_text_coaching_report(results: dict) -> str:
     report.append("EXECUTIVE SUMMARY:")
     report.append(results.get("summary", "N/A"))
     report.append("\n" + "-" * 60)
+    report.append("STRENGTHS TO EMPHASIZE:")
+    for strength in results.get("strengths_to_emphasize", []):
+        report.append(f"  • {strength}")
+
+    report.append("\nRECOMMENDED COACHING ACTIONS:")
+    for action in results.get("coaching_actions", []):
+        report.append(f"  • {action}")
+
+    interview = results.get("interview_preparation", {})
+    report.append("\nINTERVIEW PREPARATION:")
+    for title, key in (("LIKELY QUESTIONS", "likely_questions"),
+                       ("TALKING POINTS", "talking_points"),
+                       ("QUESTIONS TO ASK", "questions_to_ask")):
+        report.append(f"\n{title}:")
+        for item in interview.get(key, []):
+            report.append(f"  • {item}")
+
     report.append("MATCHING STRENGTHS:")
     for skill in results.get("matching_skills", []):
         report.append(f"  • {skill}")
@@ -131,6 +148,9 @@ def generate_text_coaching_report(results: dict) -> str:
         report.append(f"    {item.get('rewritten')}")
         report.append(f"    WHY:")
         report.append(f"    {item.get('reason')}\n")
+        report.append(f"    GROUNDING CHECK: {item.get('grounded', 'Not provided')}")
+        if item.get("unsupported_claims"):
+            report.append(f"    UNSUPPORTED CLAIMS: {', '.join(item['unsupported_claims'])}\n")
 
     report.append("=" * 60)
     return "\n".join(report)
