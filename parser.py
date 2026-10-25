@@ -1,3 +1,9 @@
+"""Resume document parsing utilities.
+
+The parser supports text-based PDF and DOCX files and rejects documents that
+do not contain enough readable text for reliable AI analysis.
+"""
+
 import io
 from pypdf import PdfReader
 import docx

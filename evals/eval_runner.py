@@ -145,6 +145,7 @@ def run(use_judge=False, limit=None, prompt_version="v2"):
             "dataset_sha256": dataset_sha,
             "prompt_sha256": prompt_sha,
             "case_limit": str(limit) if limit is not None else "all",
+            "author_name": "Praveena & Buvana's Resume Coach Evaluation",
         })
         mlflow.log_metrics(metrics)
         mlflow.log_artifact(str(output), artifact_path="evaluations")

@@ -1,3 +1,10 @@
+"""Generate downloadable resume and coaching-report documents.
+
+DOCX uploads keep their existing layout where possible. PDF uploads are
+converted into a clean, ATS-friendly DOCX because PDF formatting cannot be
+edited reliably in place with the selected libraries.
+"""
+
 import io
 import re
 import docx

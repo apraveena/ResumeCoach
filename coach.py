@@ -1,3 +1,10 @@
+"""AI coaching service for comparing resumes with job descriptions.
+
+The module loads a versioned system prompt, calls the Groq chat API, and
+converts the model's JSON response into a Python dictionary for the UI and
+evaluation runner.
+"""
+
 import os
 import json
 import re

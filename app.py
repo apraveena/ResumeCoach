@@ -1,3 +1,10 @@
+"""Streamlit interface for the ResumeCoach AI application.
+
+This module collects a resume and target job description, sends the extracted
+content to the coaching layer, displays the analysis, and offers downloadable
+tailored documents.
+"""
+
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
