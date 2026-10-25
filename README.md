@@ -1,7 +1,11 @@
 # ResumeCoach
-Your Full Name: Praveena Alapati
-Your Uplevel Email Address: praveena.alapati@gmail.com
-Name of the Problem Statement of Submission:
+
+## Submission Details
+
+Your Full Name: Praveena Alapati<br>
+Your Uplevel Email Address: praveena.alapati@gmail.com<br>
+Name of the Problem Statement of Submission: Resume Coach
+
 ## Project Purpose
 
 ResumeCoach is an AI-powered resume coaching application. It compares a candidate's resume with a target job description and produces practical, evidence-based feedback.
@@ -16,7 +20,7 @@ The application is designed to help a job seeker:
 - ask follow-up questions through a conversational resume coach; and
 - download a tailored resume and a plain-text coaching report.
 
-This project demonstrates document processing, prompt-based large language model use, structured JSON validation, file generation, and evaluation of AI output.
+This project demonstrates document processing, prompt-based large language model use, structured JSON validation, file generation, conversational memory, and evaluation of AI output.
 
 ## How the Application Works
 
@@ -83,6 +87,14 @@ The interface accepts a text-searchable PDF or DOCX resume. Scanned image-only r
 
 After analysis, the page also displays strengths to emphasize, recommended coaching actions, interview preparation, and rewrite-grounding checks. The persistent sidebar chat is visible throughout the session and uses LangChain's message-history wrapper so previous questions and answers are included in later responses.
 
+To use the chatbot:
+
+1. Upload a resume and provide a job description.
+2. Select **Analyze & Optimize Resume**.
+3. Use the **Coach Chat** sidebar to ask follow-up questions about fit, skill gaps, rewrites, or interview preparation.
+
+The initial analysis uses a fixed workflow. LangChain is used for the conversational chat chain and temporary in-memory message history; it is not used to create an autonomous agent.
+
 ## Run the Evaluation
 
 Run a three-case smoke test:
@@ -108,6 +120,8 @@ The evaluator checks:
 For prompt version 2, the evaluator also validates strengths, coaching actions, interview preparation, and rewrite-grounding fields.
 
 The LLM judge is advisory. Its results should be reviewed by a person because language-model grading is subjective. Evaluation commands make live Groq API calls and may incur usage costs.
+
+The evaluation commands require `GROQ_API_KEY`. The smoke test is recommended before running the full evaluation because each run makes live model calls.
 
 To compare the two prompt versions:
 
